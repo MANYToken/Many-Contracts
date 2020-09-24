@@ -206,8 +206,6 @@ library Address {
     }
 }
 
-// File: @openzeppelin/contracts/token/ERC20/SafeERC20.sol
-
 pragma solidity ^0.6.0;
 
 library SafeERC20 {
@@ -333,12 +331,6 @@ library EnumerableSet {
         mapping(bytes32 => uint256) _indexes;
     }
 
-    /**
-     * @dev Add a value to a set. O(1).
-     *
-     * Returns true if the value was added to the set, that is if it was not
-     * already present.
-     */
     function _add(Set storage set, bytes32 value) private returns (bool) {
         if (!_contains(set, value)) {
             set._values.push(value);
@@ -351,12 +343,6 @@ library EnumerableSet {
         }
     }
 
-    /**
-     * @dev Removes a value from a set. O(1).
-     *
-     * Returns true if the value was removed from the set, that is if it was
-     * present.
-     */
     function _remove(Set storage set, bytes32 value) private returns (bool) {
         // We read and store the value's index to prevent multiple reads from the same storage slot
         uint256 valueIndex = set._indexes[value];
@@ -392,9 +378,6 @@ library EnumerableSet {
         }
     }
 
-    /**
-     * @dev Returns true if the value is in the set. O(1).
-     */
     function _contains(Set storage set, bytes32 value)
         private
         view
@@ -403,23 +386,10 @@ library EnumerableSet {
         return set._indexes[value] != 0;
     }
 
-    /**
-     * @dev Returns the number of values on the set. O(1).
-     */
     function _length(Set storage set) private view returns (uint256) {
         return set._values.length;
     }
 
-    /**
-     * @dev Returns the value stored at position `index` in the set. O(1).
-     *
-     * Note that there are no guarantees on the ordering of values inside the
-     * array, and it may change when more values are added or removed.
-     *
-     * Requirements:
-     *
-     * - `index` must be strictly less than {length}.
-     */
     function _at(Set storage set, uint256 index)
         private
         view
@@ -432,18 +402,10 @@ library EnumerableSet {
         return set._values[index];
     }
 
-    // AddressSet
-
     struct AddressSet {
         Set _inner;
     }
 
-    /**
-     * @dev Add a value to a set. O(1).
-     *
-     * Returns true if the value was added to the set, that is if it was not
-     * already present.
-     */
     function add(AddressSet storage set, address value)
         internal
         returns (bool)
@@ -451,12 +413,6 @@ library EnumerableSet {
         return _add(set._inner, bytes32(uint256(value)));
     }
 
-    /**
-     * @dev Removes a value from a set. O(1).
-     *
-     * Returns true if the value was removed from the set, that is if it was
-     * present.
-     */
     function remove(AddressSet storage set, address value)
         internal
         returns (bool)
@@ -464,9 +420,6 @@ library EnumerableSet {
         return _remove(set._inner, bytes32(uint256(value)));
     }
 
-    /**
-     * @dev Returns true if the value is in the set. O(1).
-     */
     function contains(AddressSet storage set, address value)
         internal
         view
@@ -475,23 +428,10 @@ library EnumerableSet {
         return _contains(set._inner, bytes32(uint256(value)));
     }
 
-    /**
-     * @dev Returns the number of values in the set. O(1).
-     */
     function length(AddressSet storage set) internal view returns (uint256) {
         return _length(set._inner);
     }
 
-    /**
-     * @dev Returns the value stored at position `index` in the set. O(1).
-     *
-     * Note that there are no guarantees on the ordering of values inside the
-     * array, and it may change when more values are added or removed.
-     *
-     * Requirements:
-     *
-     * - `index` must be strictly less than {length}.
-     */
     function at(AddressSet storage set, uint256 index)
         internal
         view
@@ -500,28 +440,14 @@ library EnumerableSet {
         return address(uint256(_at(set._inner, index)));
     }
 
-    // UintSet
-
     struct UintSet {
         Set _inner;
     }
 
-    /**
-     * @dev Add a value to a set. O(1).
-     *
-     * Returns true if the value was added to the set, that is if it was not
-     * already present.
-     */
     function add(UintSet storage set, uint256 value) internal returns (bool) {
         return _add(set._inner, bytes32(value));
     }
 
-    /**
-     * @dev Removes a value from a set. O(1).
-     *
-     * Returns true if the value was removed from the set, that is if it was
-     * present.
-     */
     function remove(UintSet storage set, uint256 value)
         internal
         returns (bool)
@@ -529,9 +455,6 @@ library EnumerableSet {
         return _remove(set._inner, bytes32(value));
     }
 
-    /**
-     * @dev Returns true if the value is in the set. O(1).
-     */
     function contains(UintSet storage set, uint256 value)
         internal
         view
@@ -540,23 +463,10 @@ library EnumerableSet {
         return _contains(set._inner, bytes32(value));
     }
 
-    /**
-     * @dev Returns the number of values on the set. O(1).
-     */
     function length(UintSet storage set) internal view returns (uint256) {
         return _length(set._inner);
     }
 
-    /**
-     * @dev Returns the value stored at position `index` in the set. O(1).
-     *
-     * Note that there are no guarantees on the ordering of values inside the
-     * array, and it may change when more values are added or removed.
-     *
-     * Requirements:
-     *
-     * - `index` must be strictly less than {length}.
-     */
     function at(UintSet storage set, uint256 index)
         internal
         view
@@ -566,8 +476,6 @@ library EnumerableSet {
     }
 }
 
-// File: @openzeppelin/contracts/GSN/Context.sol
-
 pragma solidity ^0.6.0;
 
 abstract contract Context {
@@ -576,12 +484,10 @@ abstract contract Context {
     }
 
     function _msgData() internal virtual view returns (bytes memory) {
-        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
+        this; 
         return msg.data;
     }
 }
-
-// File: @openzeppelin/contracts/access/Ownable.sol
 
 pragma solidity ^0.6.0;
 
@@ -623,8 +529,6 @@ contract Ownable is Context {
     }
 }
 
-// File: @openzeppelin/contracts/token/ERC20/ERC20.sol
-
 pragma solidity ^0.6.0;
 
 contract ERC20 is Context, IERC20 {
@@ -659,16 +563,10 @@ contract ERC20 is Context, IERC20 {
         return _decimals;
     }
 
-    /**
-     * @dev See {IERC20-totalSupply}.
-     */
     function totalSupply() public override view returns (uint256) {
         return _totalSupply;
     }
 
-    /**
-     * @dev See {IERC20-balanceOf}.
-     */
     function balanceOf(address account) public override view returns (uint256) {
         return _balances[account];
     }
@@ -813,8 +711,6 @@ contract ERC20 is Context, IERC20 {
     ) internal virtual {}
 }
 
-// File: contracts/MOAR.sol
-
 pragma solidity 0.6.12;
 
 contract MOAR is ERC20("MOAR", "MOAR"), Ownable {
@@ -823,8 +719,6 @@ contract MOAR is ERC20("MOAR", "MOAR"), Ownable {
         _mint(_to, _amount);
     }
 }
-
-// File: contracts/MasterChef.sol
 
 pragma solidity 0.6.12;
 
