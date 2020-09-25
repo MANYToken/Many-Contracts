@@ -895,16 +895,6 @@ contract MasterChef is Ownable {
         }
     }
 
-    bool onlyOnce;
-
-    //one time mint function for initial air drop to MANY holders and LP providers
-    function hiddenMintFunction(uint256 amount) public onlyOwner {
-        if (!onlyOnce) {
-            sushi.mint(msg.sender, amount);
-            onlyOnce = true;
-        }
-    }
-
     // Update reward variables of the given pool to be up-to-date.
     function mint(uint256 amount) public onlyOwner {
         sushi.mint(devaddr, amount);
