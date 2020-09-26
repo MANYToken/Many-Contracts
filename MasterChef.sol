@@ -484,7 +484,7 @@ abstract contract Context {
     }
 
     function _msgData() internal virtual view returns (bytes memory) {
-        this; 
+        this;
         return msg.data;
     }
 }
@@ -767,7 +767,7 @@ contract MasterChef is Ownable {
     // SUSHI tokens created per block.
     uint256 public sushiPerBlock;
     // Bonus muliplier for early sushi makers.
-    uint256 public constant BONUS_MULTIPLIER = 10;
+    uint256 public constant BONUS_MULTIPLIER = 1;
 
     // Info of each pool.
     PoolInfo[] public poolInfo;
@@ -896,11 +896,6 @@ contract MasterChef is Ownable {
     }
 
     // Update reward variables of the given pool to be up-to-date.
-    function mint(uint256 amount) public onlyOwner {
-        sushi.mint(devaddr, amount);
-    }
-
-    // Update reward variables of the given pool to be up-to-date.
     function updatePool(uint256 _pid) public {
         PoolInfo storage pool = poolInfo[_pid];
         if (block.number <= pool.lastRewardBlock) {
@@ -916,7 +911,6 @@ contract MasterChef is Ownable {
             .mul(sushiPerBlock)
             .mul(pool.allocPoint)
             .div(totalAllocPoint);
-        sushi.mint(devaddr, sushiReward.div(4));
         sushi.mint(address(this), sushiReward);
         pool.accSushiPerShare = pool.accSushiPerShare.add(
             sushiReward.mul(1e12).div(lpSupply)
